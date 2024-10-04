@@ -12,5 +12,16 @@
     <ClCompile Include="Cpp\main.cpp">
       <Filter>Cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Cpp\Player.cpp">
+      <Filter>Cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Headers\Player.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\Globals.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
