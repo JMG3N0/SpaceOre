@@ -19,11 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cpp\DrawText.cpp" />
     <ClCompile Include="Cpp\main.cpp" />
+    <ClCompile Include="Cpp\Menu.cpp" />
     <ClCompile Include="Cpp\Player.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Globals.h" />
     <ClInclude Include="Headers\Player.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
