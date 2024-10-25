@@ -12,18 +12,18 @@
     <ClCompile Include="Cpp\main.cpp">
       <Filter>Cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\Player.cpp">
+    <ClCompile Include="Cpp\player.cpp">
       <Filter>Cpp</Filter>
     </ClCompile>
-    <ClCompile Include="Cpp\Menu.cpp">
-      <Filter>Cpp</Filter>
-    </ClCompile>
-    <ClCompile Include="Cpp\DrawText.cpp">
+    <ClCompile Include="Cpp\screens.cpp">
       <Filter>Cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Headers\Player.h">
+    <ClInclude Include="Headers\player.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Headers\screens.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -1,20 +1,28 @@
 #include "raylib.h"
 
-struct Player
+namespace space_ore
 {
-	Rectangle ship;
-	Vector2 pos;
-	Vector2 pivot;
-	Color color;
-	int hp;
-	int score;
-	int maxScore;
-	int maxBullets;
-	int currentBullets;
-	float speed;
-	float rotation;
-	float radius;
-};
 
-Player setPlayer(Player player);
-Player resetPlayer(Player player);
+	struct Player
+	{
+		Rectangle ship;
+		Vector2 pos;
+		Vector2 pivot;
+		Color color;
+		int hp;
+		int score;
+		int maxScore;
+		int maxBullets;
+		int currentBullets;
+		float speed;
+		float rotation;
+		float radius;
+	};
+
+	
+
+
+	Player initializePlayer(Player& player);
+	Player resetPlayer(Player& player);
+
+}
