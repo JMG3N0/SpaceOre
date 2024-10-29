@@ -15,5 +15,6 @@ namespace space_ore
 	void GameplayLoop();
 	void ScreenUpdate();
 	void TitleScreen();
+	void CreditsScreen();
 
 }
