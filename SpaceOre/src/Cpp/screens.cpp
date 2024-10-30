@@ -20,7 +20,7 @@ namespace space_ore
 		const int screenHeight = 768;
 		MenuScreen = Main;
 		initializePlayer(player);
-
+		SetExitKey(KEY_NULL);
 		InitWindow(screenWidth, screenHeight, "SpaceOre");
 
 		while (!WindowShouldClose())
@@ -29,15 +29,16 @@ namespace space_ore
 			ScreenUpdate();
 		}
 		
-
+		UnloadTexture(player.Spaceship);
 		CloseWindow();
 	}
 
 	void GameplayLoop()
 	{
 		
-		
-		
+		drawPlayer(player);
+
+		actionUpdate(player);
 			
 
 		
@@ -59,7 +60,7 @@ namespace space_ore
 			CreditsScreen();
 			break;
 		case 3:
-			CloseWindow();
+			WindowShouldClose();
 			break;
 		default:
 			break;
@@ -148,4 +149,6 @@ namespace space_ore
 		}
 
 	}
+
+
 }

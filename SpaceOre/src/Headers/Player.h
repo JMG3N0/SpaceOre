@@ -3,12 +3,12 @@
 namespace space_ore
 {
 
+
 	struct Player
 	{
-		Rectangle ship;
+		Texture2D Spaceship;
 		Vector2 pos;
 		Vector2 pivot;
-		Color color;
 		int hp;
 		int score;
 		int maxScore;
@@ -19,10 +19,10 @@ namespace space_ore
 		float radius;
 	};
 
-	
-
 
 	Player initializePlayer(Player& player);
 	Player resetPlayer(Player& player);
+	Player actionUpdate(Player& player);
+	void drawPlayer(Player player);
 
 }
