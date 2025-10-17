@@ -10,17 +10,17 @@ namespace space_ore
 
 	Player initializePlayer(Player& player)
 	{
-		player.Spaceship = LoadTexture("SpaceOre/res/spaceship_sheet.png");
+		player.Spaceship = LoadTexture("res/spaceship_sheet.png");
 		player.maxBullets = 1;
 		player.currentBullets = 1;
 		player.hp = 10;
 		player.score = 0;
 		player.maxScore = 0;
-		player.speed = 10;
-		player.pivot.x = 50;
-		player.pivot.y = 50;
-		player.rotation = 0;
-		player.radius = 10;
+		player.speed = 10.0f;
+		player.pivot.x = 16.0f;
+		player.pivot.y = 30.0f;
+		player.rotation = 0.0;
+		player.radius = 10.0f;
 		player.pos.x = static_cast<float>(screenWidth / 2);
 		player.pos.y = static_cast<float>(screenHeight / 2);
 
@@ -44,29 +44,29 @@ namespace space_ore
 
 	void drawPlayer(Player player)
 	{
-		Rectangle defaultShipState = {0, 0, 48, 35};
-		Rectangle movingShipState = {48, 0, 48, 35};
-		Rectangle dashingShipState = {96, 0, 48, 35};
+		Rectangle defaultShipState = {0, 0, 32, 16};
+		Rectangle movingShipState = {0, 30, 32, 16};
+		Rectangle dashingShipState = {0, 60, 32, 16};
 
-		Rectangle sourceDest = {player.pos.x, player.pos.y, 100, 100};
+		Rectangle sourceDest = {player.pos.x, player.pos.y, 32, 16};
 		
+		DrawTexturePro(player.Spaceship, defaultShipState, sourceDest, player.pivot, static_cast<float>((player.rotation + 180.0)), WHITE);
 		
-		
-		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+		/*if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 		{
-			if (player.speed >= 10)
+			if (player.speed >= 10.0f)
 			{
-				DrawTexturePro(player.Spaceship, dashingShipState, sourceDest, player.pivot, (player.rotation + 180), WHITE);
+				DrawTexturePro(player.Spaceship, dashingShipState, sourceDest, player.pivot, static_cast<float>((player.rotation + 180.0)), WHITE);
 			}
 			else
 			{
-				DrawTexturePro(player.Spaceship, movingShipState, sourceDest, player.pivot, (player.rotation + 180), WHITE);
+				DrawTexturePro(player.Spaceship, movingShipState, sourceDest, player.pivot, static_cast<float>((player.rotation + 180.0)), WHITE);
 			}
-		}
-		else
-		{
-			DrawTexturePro(player.Spaceship,defaultShipState, sourceDest, player.pivot, (player.rotation +180), WHITE);
-		}
+		}*/
+		
+		
+			
+		
 	}
 
 	Player actionUpdate(Player& player)
@@ -94,10 +94,10 @@ namespace space_ore
 			}
 		}
 
-		float angle = ((atan2(rotationY, rotationX)) + quadrantSum);
-		angle = angle * PI / 180;
+		double angle = ((atan2(rotationY, rotationX)) + quadrantSum);
+		angle = angle * PI / 180.0;
 		
-		player.rotation += angle * GetFrameTime();
+		player.rotation += angle * static_cast<double>( GetFrameTime());
 
 		return player;
 	}

@@ -8,26 +8,27 @@ namespace space_ore
 {
 	Player player;
 	Menu MenuScreen;
-	
-	int halfScreenX = (1024 / 2);
-	int halfScreenY = (768 / 2);
+	const int screenWidth = 1024;
+	const int screenHeight = 768;
+	int halfScreenX = (screenWidth / 2);
+	int halfScreenY = (screenHeight / 2);
 	
 	
 
 	void StartGame()
 	{
-		const int screenWidth = 1024;
-		const int screenHeight = 768;
+		
 		MenuScreen = Main;
-		initializePlayer(player);
-		SetExitKey(KEY_NULL);
+	//	initializePlayer(player);
 		InitWindow(screenWidth, screenHeight, "SpaceOre");
+		SetExitKey(KEY_NULL);
+		initializePlayer(player);
 
 		while (!WindowShouldClose())
 		{
 
 			ScreenUpdate();
-		}
+		} 
 		
 		UnloadTexture(player.Spaceship);
 		CloseWindow();
@@ -38,7 +39,7 @@ namespace space_ore
 		
 		drawPlayer(player);
 
-		actionUpdate(player);
+		//actionUpdate(player);
 			
 
 		
@@ -50,17 +51,18 @@ namespace space_ore
 		ClearBackground(BLACK);
 		switch (MenuScreen)
 		{
-		case 0:
+		case Main:
 			TitleScreen();
 			break;
-		case 1:
+		case Play:
 			GameplayLoop();
 			break;
-		case 2:
+		case Credits:
 			CreditsScreen();
 			break;
-		case 3:
-			WindowShouldClose();
+		case Quit:
+			UnloadTexture(player.Spaceship);
+			CloseWindow();
 			break;
 		default:
 			break;
