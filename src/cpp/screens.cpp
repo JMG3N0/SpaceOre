@@ -39,7 +39,7 @@ namespace space_ore
 		
 		drawPlayer(player);
 
-		//actionUpdate(player);
+		actionUpdate(player);
 			
 
 		
