@@ -36,10 +36,10 @@ namespace space_ore
 
 	void GameplayLoop()
 	{
-		
+		actionUpdate(player);
 		drawPlayer(player);
 
-		actionUpdate(player);
+		
 			
 
 		

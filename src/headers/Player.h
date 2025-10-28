@@ -15,8 +15,10 @@ namespace space_ore
 		int maxBullets;
 		int currentBullets;
 		float speed;
+		float maxSpeed;
+		float acceleration;
 		float radius;
-		double rotation;
+		float rotation;
 	};
 
 

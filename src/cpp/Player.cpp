@@ -16,10 +16,12 @@ namespace space_ore
 		player.hp = 10;
 		player.score = 0;
 		player.maxScore = 0;
-		player.speed = 10.0f;
+		player.speed = 0.0f;
+		player.maxSpeed = 100.0f;
+		player.acceleration = 30.0f;
 		player.pivot.x = 16.0f;
-		player.pivot.y = 30.0f;
-		player.rotation = 0.0;
+		player.pivot.y = 16.0f;
+		player.rotation = 0.0f;
 		player.radius = 10.0f;
 		player.pos.x = static_cast<float>(screenWidth / 2);
 		player.pos.y = static_cast<float>(screenHeight / 2);
@@ -35,8 +37,10 @@ namespace space_ore
 		player.currentBullets = 1;
 		player.hp = 10;
 		player.score = 0;
-		player.speed = 10;
-		player.rotation = 0;
+		player.speed = 0.0f;
+		player.maxSpeed = 100.0f;
+		player.acceleration = 30.0f;
+		player.rotation = 0.0f;
 		player.pos.x = static_cast<float>(screenWidth / 2);
 		player.pos.y = static_cast<float>(screenHeight / 2);
 		return player;
@@ -50,18 +54,21 @@ namespace space_ore
 
 		Rectangle sourceDest = {player.pos.x, player.pos.y, 32, 32};
 		
-		DrawTexturePro(player.Spaceship, defaultShipState, sourceDest, player.pivot, static_cast<float>((player.rotation + 180.0)), WHITE);
+		DrawTexturePro(player.Spaceship, defaultShipState, sourceDest, player.pivot, player.rotation, WHITE);
+	
 		
 		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 		{
-			if (player.speed >= 10.0f)
+			if (player.speed > 100.0f)
 			{
-				DrawTexturePro(player.Spaceship, dashingShipState, sourceDest, player.pivot, static_cast<float>((player.rotation + 180.0)), WHITE);
+				DrawTexturePro(player.Spaceship, dashingShipState, sourceDest, player.pivot,player.rotation, WHITE);
 			}
 			else
 			{
-				DrawTexturePro(player.Spaceship, movingShipState, sourceDest, player.pivot, static_cast<float>((player.rotation + 180.0)), WHITE);
+				DrawTexturePro(player.Spaceship, movingShipState, sourceDest, player.pivot, player.rotation, WHITE);
 			}
+
+
 		}
 		
 		
@@ -73,9 +80,12 @@ namespace space_ore
 	{
 		Vector2 mousePos = GetMousePosition();
 		Vector2 rotation = { mousePos.x - player.pos.x,mousePos.y - player.pos.y };
-		double quadrantSum = 0.0;
+		Vector2 direction = { 0.0f,0.0f };
+		Vector2 directionNorm = { 0.0f,0.0f };
 
-		if (mousePos.x < player.pos.x)
+		//double quadrantSum = 0.0;
+
+		/*if (mousePos.x < player.pos.x)
 		{
 			
 				quadrantSum = 180.0;
@@ -91,13 +101,27 @@ namespace space_ore
 			{
 				quadrantSum = 0.0;
 			}
+		}*/
+
+		float angle = ((atan2(rotation.y, rotation.x)));
+		angle = (angle * 180 / PI);
+		//angle += quadrantSum;
+
+		player.rotation = angle - 270.0f;
+
+
+		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+		{
+			 direction = { mousePos.x - player.pos.x,mousePos.y - player.pos.y };
+			 directionNorm = Vector2Normalize(direction);
+
+			player.speed += player.acceleration * GetFrameTime();
+
 		}
 
-		double angle = ((atan2(rotation.y, rotation.x)));
-		angle = (angle * 180 / PI);
-		angle += quadrantSum;
+		player.pos.x += directionNorm.x * GetFrameTime() * player.speed;
+		player.pos.y += directionNorm.y * GetFrameTime() * player.speed;
 
-		player.rotation += angle * GetFrameTime();
 
 		return player;
 	}
