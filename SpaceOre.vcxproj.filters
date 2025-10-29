@@ -16,12 +16,33 @@
     <ClCompile Include="src\cpp\screens.cpp">
       <Filter>cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\Asteroid.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cpp\Bullet.cpp">
+      <Filter>cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\headers\Player.h">
       <Filter>header</Filter>
     </ClInclude>
     <ClInclude Include="src\headers\screens.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>header</Filter>
+    </ClInclude>
+    <ClInclude Include="src\headers\Bullet.h">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>

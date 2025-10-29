@@ -11,20 +11,22 @@ namespace space_ore
 	Player initializePlayer(Player& player)
 	{
 		player.Spaceship = LoadTexture("res/spaceship_sheet.png");
-		player.maxBullets = 1;
-		player.currentBullets = 1;
+		player.maxBullets = 3;
+		currentBullets = 0;
 		player.hp = 10;
 		player.score = 0;
 		player.maxScore = 0;
-		player.speed = { 0.0f, 0.0f };
+		player.currentSpeed = { 0.0f, 0.0f };
 		player.maxSpeed = 100.0f;
-		player.currentSpeed = 30.0f;
+		player.acceleration = 30.0f;
 		player.pivot.x = 16.0f;
 		player.pivot.y = 16.0f;
 		player.rotation = 0.0f;
 		player.radius = 10.0f;
 		player.pos.x = static_cast<float>(screenWidth / 2);
 		player.pos.y = static_cast<float>(screenHeight / 2);
+		player.iFramesActive = false;
+		player.iFramesTimer = 0.0f;
 
 		return player;
 	}
@@ -33,12 +35,13 @@ namespace space_ore
 	{
 
 
-		player.maxBullets = 1;
-		player.currentBullets = 1;
+		
+		currentBullets = 0;
+		player.maxBullets = 3;
 		player.hp = 10;
 		player.score = 0;
-		player.speed = { 0.0f, 0.0f };
-		player.currentSpeed = 30.0f;
+		player.currentSpeed = { 0.0f, 0.0f };
+		player.acceleration = 30.0f;
 		player.maxSpeed = 100.0f;
 		player.rotation = 0.0f;
 		player.pos.x = static_cast<float>(screenWidth / 2);
@@ -59,7 +62,7 @@ namespace space_ore
 		
 		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 		{
-			if (Vector2Length(player.speed) > 100)
+			if (Vector2Length(player.currentSpeed) > 100)
 			{
 				DrawTexturePro(player.Spaceship, dashingShipState, sourceDest, player.pivot, (player.rotation - 270.0f), WHITE);
 			}
@@ -89,33 +92,56 @@ namespace space_ore
 
 		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 		{
-			Vector2 acceleration = Vector2Scale(Vector2Normalize(direction), player.currentSpeed * GetFrameTime());
+			Vector2 acceleration = Vector2Scale(Vector2Normalize(direction), player.acceleration * GetFrameTime());
 			
 
-			player.speed = Vector2Add(player.speed, acceleration);
+			player.currentSpeed = Vector2Add(player.currentSpeed, acceleration);
 			
 
 		}
 
-		if (Vector2Length(player.speed) > player.maxSpeed)
+		if (Vector2Length(player.currentSpeed) > player.maxSpeed)
 		{
-			player.speed = Vector2Scale(Vector2Normalize(player.speed), player.maxSpeed);
+			player.currentSpeed = Vector2Scale(Vector2Normalize(player.currentSpeed), player.maxSpeed);
 		}
 
-		player.pos = Vector2Add(player.pos, Vector2Scale(player.speed, GetFrameTime()));
+		player.pos = Vector2Add(player.pos, Vector2Scale(player.currentSpeed, GetFrameTime()));
 
 		if (player.pos.x < -player.radius)
+		{
 			player.pos.x = static_cast<float>(GetScreenWidth()) + player.radius;
+		}
 
 		if (player.pos.x > GetScreenWidth() + player.radius)
+		{
 			player.pos.x = -player.radius;
+		}
 
 		if (player.pos.y < -player.radius)
+		{
 			player.pos.y = static_cast<float>(GetScreenHeight()) + player.radius;
+		}
 
 		if (player.pos.y > GetScreenHeight() + player.radius)
+		{
 			player.pos.y = -player.radius;
+		}
+
+		if (player.iFramesActive == true)
+		{
+			player.iFramesTimer -= GetFrameTime();
+			if (player.iFramesTimer <= 0.0f)
+			{
+				player.iFramesActive = false;
+			}
+		}
 
 		return player;
+	}
+
+	void iFrames(Player& player)
+	{	
+		player.iFramesActive = true;
+		player.iFramesTimer = 5.0f;
 	}
 }

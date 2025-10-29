@@ -6,7 +6,7 @@ namespace space_ore
 
 	enum Menu
 	{
-		Main = 0, Play, Credits, Quit
+		Main = 0, Play, Credits, Quit, GameOver
 	};
 
 	
@@ -16,5 +16,5 @@ namespace space_ore
 	void ScreenUpdate();
 	void TitleScreen();
 	void CreditsScreen();
-
+	void GameOverScreen();
 }
